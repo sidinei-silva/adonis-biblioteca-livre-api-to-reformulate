@@ -16,6 +16,22 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.get('/', () => {
-  return { greeting: 'Hello world in JSON' }
-})
+
+
+
+Route.group('api', function () {
+  // Authentications
+  Route.post('admin/auth', 'AdminController.authenticate')
+}).prefix('api')
+
+
+// Admin Group Routes
+Route.group(() => {
+
+  Route.resource('admins', 'AdminController')
+  .apiOnly()
+  .except('destroy');
+
+}).prefix('api')
+.middleware(['auth:admin'])
+.formats(['json']);
