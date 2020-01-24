@@ -28,4 +28,6 @@ Route.group('api', function () {
   .apiOnly()
   .except('destroy');
 
+  Route.post('admin/auth', 'AdminController.authenticate')
+
 }).prefix('api')
