@@ -20,14 +20,18 @@ const Route = use('Route')
 
 
 Route.group('api', function () {
-  Route.get('/', () => {
-    return { greeting: 'Hello world in JSON' }
-  })
+  // Authentications
+  Route.post('admin/auth', 'AdminController.authenticate')
+}).prefix('api')
+
+
+// Admin Group Routes
+Route.group(() => {
 
   Route.resource('admins', 'AdminController')
   .apiOnly()
   .except('destroy');
 
-  Route.post('admin/auth', 'AdminController.authenticate')
-
 }).prefix('api')
+.middleware(['auth:admin'])
+.formats(['json']);
