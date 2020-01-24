@@ -19,8 +19,13 @@ const Route = use('Route')
 
 
 
-Route.group('version1', function () {
+Route.group('api', function () {
   Route.get('/', () => {
     return { greeting: 'Hello world in JSON' }
   })
+
+  Route.resource('admins', 'AdminController')
+  .apiOnly()
+  .except('destroy');
+
 }).prefix('api')
