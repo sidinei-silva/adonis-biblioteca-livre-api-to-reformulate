@@ -74,7 +74,7 @@ class AdminController {
 
   async authenticate({request, auth}){
     const {email, password} = request.all();
-    const adminAuth = auth.authenticator("jwt.admin");
+    const adminAuth = auth.authenticator("admin");
 
     const token = await adminAuth.attempt(email, password);
 
