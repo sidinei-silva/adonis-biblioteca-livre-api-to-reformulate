@@ -78,10 +78,7 @@ class AdminController {
 
     const token = await adminAuth.attempt(email, password);
 
-    return {
-      success: true,
-      data: token
-    };
+    return token;
 
   }
 }
